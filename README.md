@@ -4,13 +4,6 @@ BeeNeural Task Manager is a focused place to collect the work that needs your at
 
 The main screen keeps the workflow intentionally simple: add a task, mark it complete, edit its title, or remove it. Search and filters make the list comfortable to use as it grows. When MongoDB is not configured, the interface falls back to preview tasks so the experience can still be explored locally.
 
-## Screenshots
-
-The desktop workspace keeps the task list visible and the primary action close at hand. The layout also adapts down to a compact mobile view without hiding the important controls.
-
-![BeeNeural Task Manager desktop workspace](public/screenshots/desktop.png)
-
-![BeeNeural Task Manager mobile workspace](public/screenshots/mobile.png)
 
 ## Stack
 
