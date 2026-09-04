@@ -1,0 +1,6 @@
+import { NextResponse } from "next/server";
+import { connectToDatabase } from "@/lib/mongodb";
+import { Task } from "@/models/Task";
+
+export async function GET() { try { await connectToDatabase(); const tasks = await Task.find().sort({ createdAt: -1 }).lean(); return NextResponse.json({ tasks }); } catch (error) { const message = String(error); const missingUri = message.includes("MONGODB_URI"); return NextResponse.json({ error: missingUri ? "MONGODB_URI is not configured" : "MongoDB connection failed. Check Atlas Network Access and database credentials." }, { status: 503 }); } }
+export async function POST(request: Request) { try { const body = await request.json(); if (!body.title?.trim()) return NextResponse.json({ error: "A task title is required" }, { status: 400 }); await connectToDatabase(); const task = await Task.create({ title: body.title }); return NextResponse.json({ task }, { status: 201 }); } catch (error) { const message = String(error); const missingUri = message.includes("MONGODB_URI"); return NextResponse.json({ error: missingUri ? "MONGODB_URI is not configured" : "MongoDB connection failed. Check Atlas Network Access and database credentials." }, { status: 503 }); } }
